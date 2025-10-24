@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Nota</title>
+</head>
+<body>
+    <h1>Buscar nota</h1>
+    <form action="#" th:action="@{/find-note}" method="get">
+        <label for="keyword">Texto que deseas buscar: </label>
+        <input type="text" id="keyword" name="keyword" required><br><br>
+        <button type="submit">Buscar Nota</button>
+    </form>
+    <p><a th:href="@{/menu}">Volver al menú</a></p>
+</body>
+</html>
