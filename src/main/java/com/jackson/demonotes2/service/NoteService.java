@@ -3,6 +3,7 @@ package com.jackson.demonotes2.service;
 import com.jackson.demonotes2.exception.ConcurrencyConflictException;
 import com.jackson.demonotes2.exception.NoteNotFoundException;
 import com.jackson.demonotes2.model.Note;
+import com.jackson.demonotes2.model.NoteStats;
 import com.jackson.demonotes2.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,23 @@ public class NoteService {
     public Note findByIdOrThrow(Long id) {
         return noteRepository.findById(id)
                 .orElseThrow(() -> new NoteNotFoundException(id));
+    }
+
+    public NoteStats getNoteStatistics() {
+        List<Note> notes = noteRepository.findAll();
+        return new NoteStats(
+                notes.size(),
+                // Promedio del contenido de las notas, si no lo encuentra devuelve 0
+                notes.stream()
+                        .mapToDouble(n -> n.getContent().length())
+                        .average()
+                        .orElse(0),
+                // Nota de mayor longitud de título, si no lo encuentra devuelve 0
+                notes.stream()
+                        .mapToInt(n -> n.getTitle().length())
+                        .max()
+                        .orElse(0)
+        );
     }
 
     @Transactional

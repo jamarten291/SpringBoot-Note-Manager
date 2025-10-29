@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jackson.demonotes2.exception.ConcurrencyConflictException;
 import com.jackson.demonotes2.exception.NoteNotFoundException;
+import com.jackson.demonotes2.model.NoteStats;
 import com.jackson.demonotes2.repository.NoteRepository;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
@@ -92,6 +93,11 @@ public class PageController {
         List<Note> notes = noteService.findByContentContaining(keyword);
         model.addAttribute("notes", notes);
         return "list_notes";
+    }
+
+    @GetMapping("/stats")
+    public NoteStats getNoteStats() {
+        return noteService.getNoteStatistics();
     }
 
     @GetMapping("/test-500")
