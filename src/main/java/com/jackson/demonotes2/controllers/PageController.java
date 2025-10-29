@@ -95,11 +95,6 @@ public class PageController {
         return "list_notes";
     }
 
-    @GetMapping("/stats")
-    public NoteStats getNoteStats() {
-        return noteService.getNoteStatistics();
-    }
-
     @GetMapping("/test-500")
     public String triggerInternalError() {
         String s = null;

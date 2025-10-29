@@ -1,6 +1,7 @@
 package com.jackson.demonotes2.controllers;
 
 import com.jackson.demonotes2.model.Note;
+import com.jackson.demonotes2.model.NoteStats;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,11 @@ public class NoteRestController {
     public ResponseEntity<Note> updateNote(@PathVariable Long id, @Valid @RequestBody Note noteDetails) {
         Note updated = noteService.update(id, noteDetails);
         return ResponseEntity.ok(updated);
+    }
+
+    @GetMapping("/stats")
+    public NoteStats getNoteStats() {
+        return noteService.getNoteStatistics();
     }
 }
 
