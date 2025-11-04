@@ -1,6 +1,7 @@
 package com.jackson.demonotes2.service;
 
 import com.jackson.demonotes2.exception.ConcurrencyConflictException;
+import com.jackson.demonotes2.exception.InvalidNoteContentException;
 import com.jackson.demonotes2.exception.NoteNotFoundException;
 import com.jackson.demonotes2.model.Note;
 import com.jackson.demonotes2.model.NoteStats;
@@ -8,6 +9,8 @@ import com.jackson.demonotes2.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -21,7 +24,7 @@ public class NoteService {
 
     public List<Note> findAll() {
         List<Note> notes = noteRepository.findAll();
-        notes.sort((o1, o2) -> Long.compare(o1.getId(), o2.getId()));
+        notes.sort(Comparator.comparingLong(Note::getId));
         return notes;
     }
 
@@ -49,11 +52,25 @@ public class NoteService {
 
     @Transactional
     public Note create(Note note) {
+        List<String> forbiddenWords = new ArrayList<>(List.of("spam", "anuncio", "publicidad"));
+
+        if (containsForbiddenWord(note.getTitle(), forbiddenWords) ||
+                containsForbiddenWord(note.getContent(), forbiddenWords)) {
+            throw new InvalidNoteContentException();
+        }
+
         return noteRepository.save(note);
     }
 
     @Transactional
     public Note update(Long id, Note noteDetails) {
+        List<String> forbiddenWords = new ArrayList<>(List.of("spam", "anuncio", "publicidad"));
+
+        if (containsForbiddenWord(noteDetails.getTitle(), forbiddenWords) ||
+                containsForbiddenWord(noteDetails.getContent(), forbiddenWords)) {
+            throw new InvalidNoteContentException();
+        }
+
         Note note = findByIdOrThrow(id);
 
         if ("CONFLICTO".equalsIgnoreCase(noteDetails.getContent())) {
@@ -76,5 +93,16 @@ public class NoteService {
 
     public List<Note> findByContentContaining(String keyword) {
         return noteRepository.findByContentContaining(keyword);
+    }
+
+    private boolean containsForbiddenWord(String text, List<String> forbidden) {
+        if (text == null) return false;
+        String lower = text.toLowerCase().trim();
+        // separar por no letras/dígitos para coincidir por palabra
+        String[] tokens = lower.split("\\P{Alnum}+");
+        for (String t : tokens) {
+            if (forbidden.contains(t)) return true;
+        }
+        return false;
     }
 }
