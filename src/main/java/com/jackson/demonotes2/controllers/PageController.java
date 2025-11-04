@@ -3,13 +3,8 @@ package com.jackson.demonotes2.controllers;
 
 import java.util.List;
 
-import com.jackson.demonotes2.exception.ConcurrencyConflictException;
-import com.jackson.demonotes2.exception.NoteNotFoundException;
-import com.jackson.demonotes2.model.NoteStats;
-import com.jackson.demonotes2.repository.NoteRepository;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired; // Asegúrate de importar el repositorio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,6 +45,13 @@ public class PageController {
     @GetMapping("/list-notes")
     public String showAllNotes(Model model) {
         List<Note> notes = noteService.findAll();
+        model.addAttribute("notes", notes);
+        return "list_notes";
+    }
+
+    @GetMapping("/list-notes-content")
+    public String showAllNotesSortedByContent(Model model) {
+        List<Note> notes = noteService.findAllSortedByContent();
         model.addAttribute("notes", notes);
         return "list_notes";
     }

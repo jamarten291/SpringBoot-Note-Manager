@@ -28,6 +28,12 @@ public class NoteService {
         return notes;
     }
 
+    public List<Note> findAllSortedByContent() {
+        List<Note> notes = noteRepository.findAll();
+        notes.sort(Comparator.comparingInt(n -> n.getContent().length()));
+        return notes;
+    }
+
     public Note findByIdOrThrow(Long id) {
         return noteRepository.findById(id)
                 .orElseThrow(() -> new NoteNotFoundException(id));
