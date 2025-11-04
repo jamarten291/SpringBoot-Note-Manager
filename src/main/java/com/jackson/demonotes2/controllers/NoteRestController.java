@@ -1,5 +1,6 @@
 package com.jackson.demonotes2.controllers;
 
+import com.jackson.demonotes2.exception.InvalidNoteContentException;
 import com.jackson.demonotes2.model.Note;
 import com.jackson.demonotes2.model.NoteStats;
 import com.jackson.demonotes2.service.NoteService;
@@ -28,8 +29,15 @@ public class NoteRestController {
 
     @PostMapping
     public ResponseEntity<Note> save(@Valid @RequestBody Note note) {
+        List<String> forbiddenWords = List.of("spam", "publicidad", "anuncio");
         Note created = noteService.create(note);
-        return ResponseEntity.ok(created);
+
+        if (forbiddenWords.contains(created.getTitle()) ||
+                forbiddenWords.contains(created.getContent())) {
+            throw new InvalidNoteContentException();
+        } else {
+            return ResponseEntity.ok(created);
+        }
     }
 
     @GetMapping("/{id}")
