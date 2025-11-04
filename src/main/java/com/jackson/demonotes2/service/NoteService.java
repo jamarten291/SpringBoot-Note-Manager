@@ -95,6 +95,7 @@ public class NoteService {
         return noteRepository.findByContentContaining(keyword);
     }
 
+    // Method used to validate the content of the new note
     private boolean containsForbiddenWord(String text, List<String> forbidden) {
         if (text == null) return false;
         String lower = text.toLowerCase().trim();
