@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <title>Menú Principal</title>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <h1>Menú Principal</h1>
     <ul>
         <li><a th:href="@{/list-notes}">Listar Notas</a></li>
+        <li><a th:href="@{/list-notes-content}">Listar Notas ordenadas por contenido</a></li>
         <li><a th:href="@{/new-note}">Añadir Nueva Nota</a></li>
         <li><a th:href="@{/delete-note}">Borrar Nota (Implementado con JS)</a></li>
         <!--<li><a th:href="@{/edit-note}">Modificar Nota</a></li>-->
