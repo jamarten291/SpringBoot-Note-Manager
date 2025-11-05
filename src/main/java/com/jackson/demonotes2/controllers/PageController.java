@@ -43,8 +43,10 @@ public class PageController {
     }
 
     @GetMapping("/list-notes")
-    public String showAllNotes(Model model) {
-        List<Note> notes = noteService.findAll();
+    public String showAllNotes(@RequestParam(value = "keyword", defaultValue = "") String keyword, Model model) {
+        List<Note> notes = keyword.isEmpty() ?
+                noteService.findAll() :
+                noteService.findByContentContaining(keyword);
         model.addAttribute("notes", notes);
         return "list_notes";
     }
