@@ -21,6 +21,17 @@
                 <td th:text="${note.title}"></td>
                 <td th:text="${note.content}"></td>
                 <td th:text="${#temporals.format(note.getCreationDate(), 'dd-MMM-yyyy')}"></td>
+                <td>
+                    <form action="#" th:action="@{/edit-note/{id}/(id=${note.id})}" method="get">
+                        <input type="submit" value="Editar"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/delete-note/{id}(id=${note.id})}" method="post">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <input type="submit" value="Eliminar"/>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

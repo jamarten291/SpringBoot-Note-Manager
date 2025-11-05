@@ -61,7 +61,8 @@ public class NoteService {
         List<String> forbiddenWords = new ArrayList<>(List.of("spam", "anuncio", "publicidad"));
 
         if (containsForbiddenWord(note.getTitle(), forbiddenWords) ||
-                containsForbiddenWord(note.getContent(), forbiddenWords)) {
+                containsForbiddenWord(note.getContent(), forbiddenWords) ||
+                note.getContent().length() < 10) {
             throw new InvalidNoteContentException();
         }
         if (note.getContent().contains("DUPLICADO")) {

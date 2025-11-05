@@ -81,6 +81,12 @@ public class PageController {
         return "redirect:/list-notes";
     }
 
+    @DeleteMapping("/delete-note/{id}")
+    public String deleteNote(@PathVariable Long id) {
+        noteService.delete(id);
+        return "redirect:/list-notes";
+    }
+
     @GetMapping("/important-note")
     public String showImportantNote(Model model) {
         List<Note> notes = noteService.findByContentContaining("importante");
