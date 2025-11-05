@@ -64,6 +64,9 @@ public class NoteService {
                 containsForbiddenWord(note.getContent(), forbiddenWords)) {
             throw new InvalidNoteContentException();
         }
+        if (note.getContent().contains("DUPLICADO")) {
+            throw new ConcurrencyConflictException(note.getContent());
+        }
 
         return noteRepository.save(note);
     }
