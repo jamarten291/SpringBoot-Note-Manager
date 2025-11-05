@@ -22,8 +22,10 @@ public class NoteRestController {
     }
 
     @GetMapping
-    public List<Note> findAll() {
-        return noteService.findAll();
+    public List<Note> findAll(@RequestParam(defaultValue = "") String keyword) {
+        return keyword.isEmpty() ?
+                noteService.findAll() :
+                noteService.findByContentContaining(keyword);
     }
 
     @PostMapping
