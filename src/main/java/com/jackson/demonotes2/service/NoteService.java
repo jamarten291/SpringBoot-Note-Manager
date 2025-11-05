@@ -24,7 +24,7 @@ public class NoteService {
 
     public List<Note> findAll() {
         List<Note> notes = noteRepository.findAll();
-        notes.sort(Comparator.comparingLong(Note::getId));
+        notes.sort(Comparator.comparingInt(n -> n.getCreationDate().getNano()));
         return notes;
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <title>Lista de Notas</title>
     <meta charset="UTF-8">
@@ -24,6 +24,7 @@
             </tr>
         </tbody>
     </table>
+    <p th:text="${notes.size()}"></p>
     <p><a th:href="@{/menu}">Volver al menú</a></p>
 </body>
 </html>
