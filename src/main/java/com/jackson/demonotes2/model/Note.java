@@ -23,6 +23,7 @@ public class Note {
     private String content;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Note() {
         this.createdAt = LocalDateTime.now();
@@ -38,6 +39,7 @@ public class Note {
 
     public void setTitle(String title) {
         this.title = title;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public String getContent() {
@@ -46,6 +48,11 @@ public class Note {
 
     public void setContent(String content) {
         this.content = content;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public LocalDateTime getCreationDate() {

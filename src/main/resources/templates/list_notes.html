@@ -13,6 +13,7 @@
                 <th>Título</th>
                 <th>Contenido</th>
                 <th>Fecha creación</th>
+                <th>Última modificación</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
                 <td th:text="${note.title}"></td>
                 <td th:text="${note.content}"></td>
                 <td th:text="${#temporals.format(note.getCreationDate(), 'dd-MMM-yyyy')}"></td>
+                <td th:text="${#temporals.format(note.getUpdatedAt(), 'dd-MMM-yyyy hh:mm:ss')}"></td>
                 <td>
                     <form action="#" th:action="@{/edit-note/{id}/(id=${note.id})}" method="get">
                         <input type="submit" value="Editar"/>
