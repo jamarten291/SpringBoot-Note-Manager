@@ -43,7 +43,6 @@ public class NoteRestController {
         return ResponseEntity.noContent().build();
     }
 
-    // Ejemplo
     @PutMapping("/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable Long id, @Valid @RequestBody Note noteDetails) {
         Note updated = noteService.update(id, noteDetails);
