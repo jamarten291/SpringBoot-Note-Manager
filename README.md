@@ -20,3 +20,6 @@ DB_PASS=your_db_password
 ```
 
 These variables are used by the application.properties file to access your database with your credentials
+
+>[!NOTE]
+> You can also just run the application class and it will run with default credentials
