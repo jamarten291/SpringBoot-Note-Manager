@@ -94,6 +94,8 @@ public class PageController {
         return "redirect:/list-notes";
     }
 
+    // Delete note con parámetro recibido por formulario
+    // (noteId es el identificador del input donde se mete el ID de la nota desde el formulario)
     @DeleteMapping("/delete-note")
     public String deleteNoteByParam(@RequestParam("noteId") Long id) {
         noteService.deleteById(id);
