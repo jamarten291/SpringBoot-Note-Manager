@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head>
-    <title>Lista de Notas</title>
-    <meta charset="UTF-8">
+<head th:replace="fragments/head :: head">
+    <title></title>
 </head>
 <body>
-    <h1>Lista de Notas</h1>
-    <table border="1">
-        <thead>
+    <div class="container-fluid">
+        <h1>Lista de Notas</h1>
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Título</th>
@@ -16,9 +16,9 @@
                 <th>Fecha creación</th>
                 <th>Última modificación</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr th:each="note: ${notes}"> 
+            </thead>
+            <tbody>
+            <tr th:each="note: ${notes}">
                 <td th:text="${note.id}"></td>
                 <td th:text="${note.title}"></td>
                 <td th:text="${note.content}"></td>
@@ -37,9 +37,11 @@
                     </form>
                 </td>
             </tr>
-        </tbody>
-    </table>
-    <p th:text="${notes.size()}"></p>
-    <p><a th:href="@{/menu}">Volver al menú</a></p>
+            </tbody>
+        </table>
+        <p th:text="${notes.size()}"></p>
+        <p><a th:href="@{/menu}">Volver al menú</a></p>
+    </div>
 </body>
+<footer th:replace="fragments/footer :: scripts_bootstrap"></footer>
 </html>

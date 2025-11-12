@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Buscar Nota</title>
+<head th:replace="fragments/head :: head">
+    <title></title>
 </head>
 <body>
-    <h1>Buscar nota</h1>
-    <form action="#" th:action="@{/find-note}" method="get">
-        <label for="keyword">Texto que deseas buscar: </label>
-        <input type="text" id="keyword" name="keyword" required><br><br>
-        <button type="submit">Buscar Nota</button>
+<div class="container-fluid">
+    <h1 class="my-4">Buscar nota</h1>
+
+    <form th:action="@{/find-note}"
+          method="get"
+          class="needs-validation"
+          novalidate>
+
+        <!-- Campo de búsqueda -->
+        <div class="mb-3">
+            <label for="keyword" class="form-label">Texto que deseas buscar</label>
+            <input type="text"
+                   id="keyword"
+                   name="keyword"
+                   class="form-control"
+                   required>
+            <div class="invalid-feedback">
+                Introduce un texto para buscar.
+            </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <button type="submit" class="btn btn-primary">Buscar Nota</button>
     </form>
-    <p><a th:href="@{/menu}">Volver al menú</a></p>
+
+    <p class="mt-3"><a th:href="@{/menu}" class="link-secondary">Volver al menú</a></p>
+</div>
+
 </body>
+<footer th:replace="fragments/footer :: scripts_bootstrap"></footer>
 </html>

@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head>
-    <title>Menú Principal</title>
-    <meta charset="UTF-8">
+<head th:replace="fragments/head :: head">
+    <title></title>
 </head>
 <body>
-    <h1>Menú Principal</h1>
-    <ul>
-        <li><a th:href="@{/list-notes}">Listar Notas</a></li>
-        <li><a th:href="@{/list-notes-content}">Listar Notas ordenadas por contenido</a></li>
-        <li><a th:href="@{/new-note}">Añadir Nueva Nota</a></li>
-        <li><a th:href="@{/delete-note}">Borrar Nota (Implementado con JS)</a></li>
-        <!--<li><a th:href="@{/edit-note}">Modificar Nota</a></li>-->
-        <li><a th:href="@{/search-note}">Buscar notas</a></li>
-        <li><a th:href="@{/important-note}">Listar notas importantes</a></li>
-        <li><a th:href="@{/test-500}">Simular error</a></li>
-    </ul>
+    <div class="container-fluid">
+        <h1>Menú Principal</h1>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a th:href="@{/list-notes}">Listar Notas</a></li>
+            <li class="list-group-item"><a th:href="@{/list-notes-content}">Listar Notas ordenadas por contenido</a></li>
+            <li class="list-group-item"><a th:href="@{/new-note}">Añadir Nueva Nota</a></li>
+            <li class="list-group-item"><a th:href="@{/delete-note}">Borrar Nota (Implementado con JS)</a></li>
+            <!--<li class="list-group-item"><a th:href="@{/edit-note}">Modificar Nota</a></li>-->
+            <li class="list-group-item"><a th:href="@{/search-note}">Buscar notas</a></li>
+            <li class="list-group-item"><a th:href="@{/important-note}">Listar notas importantes</a></li>
+            <li class="list-group-item"><a th:href="@{/test-500}">Simular error</a></li>
+
+        </ul>
+    </div>
 </body>
+<footer th:replace="fragments/footer :: scripts_bootstrap"></footer>
 </html>

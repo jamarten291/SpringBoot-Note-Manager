@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org", lang="es">
-<head>
-    <title>Error del Sistema</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/head :: head">
+    <title></title>
 </head>
 <body>
     <h1>¡Algo ha ido muy mal! (Error 500)</h1>
     <p th:text="${errorMessage}">Mensaje de error por defecto.</p>
     <p><a th:href="@{/menu}">Volver al menú</a></p>
 </body>
+<footer th:replace="fragments/footer :: scripts_bootstrap"></footer>
 </html>
