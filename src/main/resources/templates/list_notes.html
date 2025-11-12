@@ -24,7 +24,7 @@
                 <td th:text="${#temporals.format(note.getCreationDate(), 'dd-MMM-yyyy')}"></td>
                 <td th:text="${#temporals.format(note.getUpdatedAt(), 'dd-MMM-yyyy hh:mm:ss')}"></td>
                 <td>
-                    <form action="#" th:action="@{/edit-note/{id}/(id=${note.id})}" method="get">
+                    <form action="#" th:action="@{/edit-note/{id}(id=${note.id})}" method="get">
                         <input type="submit" value="Editar"/>
                     </form>
                 </td>
