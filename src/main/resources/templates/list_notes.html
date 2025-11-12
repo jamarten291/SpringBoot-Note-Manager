@@ -12,6 +12,7 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Contenido</th>
+                <th>Categoría</th>
                 <th>Fecha creación</th>
                 <th>Última modificación</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td th:text="${note.id}"></td>
                 <td th:text="${note.title}"></td>
                 <td th:text="${note.content}"></td>
+                <td th:text="${note.category == null ? 'Sin categoría' : note.category.getName()}"></td>
                 <td th:text="${#temporals.format(note.getCreationDate(), 'dd-MMM-yyyy')}"></td>
                 <td th:text="${#temporals.format(note.getUpdatedAt(), 'dd-MMM-yyyy hh:mm:ss')}"></td>
                 <td>

@@ -3,8 +3,11 @@ package com.jackson.demonotes2.controllers;
 
 import java.util.List;
 
+import com.jackson.demonotes2.model.Category;
+import com.jackson.demonotes2.repository.CategoryRepository;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +18,13 @@ import com.jackson.demonotes2.model.Note;
 @Controller
 public class PageController {
 
-    private final NoteService noteService;
+    @Autowired
+    private NoteService noteService;
 
-    public PageController(NoteService noteService) {
-        this.noteService = noteService;
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    public PageController() {
     }
 
     @GetMapping("/menu")
@@ -29,6 +35,7 @@ public class PageController {
     @GetMapping("/new-note")
     public String showNewNoteForm(Model model) {
         model.addAttribute("note", new Note());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "new_note";
     }
 
@@ -68,6 +75,7 @@ public class PageController {
     public String showEditNoteForm(@PathVariable Long id, Model model) {
         Note note = noteService.findByIdOrThrow(id);
         model.addAttribute("note", note);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "edit_note";
     }
 
