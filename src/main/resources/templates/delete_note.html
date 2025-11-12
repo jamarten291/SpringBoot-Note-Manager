@@ -3,13 +3,15 @@
 <head th:replace="fragments/head :: head">
     <title></title>
 </head>
-<body>
+<body class="bg-light">
 <div class="container-fluid">
     <h1 class="my-4">Borrar Nota</h1>
 
-    <form onsubmit="event.preventDefault(); deleteNote();"
+    <form action="#" th:action="@{/delete-note}" method="post"
           class="needs-validation"
           novalidate>
+        <!-- DELETE mediante input oculto -->
+        <input type="hidden" name="_method" value="DELETE"/>
 
         <!-- ID de la nota -->
         <div class="mb-3">
@@ -18,7 +20,8 @@
                    id="noteId"
                    name="noteId"
                    class="form-control"
-                   required>
+                   required
+                   min="1">
             <div class="invalid-feedback">
                 Introduce un ID válido.
             </div>
@@ -32,6 +35,6 @@
 </div>
 
 </body>
-<footer th:replace="fragments/footer_delete :: scripts_delete">
+<footer th:replace="fragments/footer :: scripts">
 </footer>
 </html>

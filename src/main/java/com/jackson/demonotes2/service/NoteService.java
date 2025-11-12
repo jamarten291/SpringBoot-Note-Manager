@@ -95,7 +95,7 @@ public class NoteService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         if (!noteRepository.existsById(id)) {
             throw new NoteNotFoundException(id);
         }

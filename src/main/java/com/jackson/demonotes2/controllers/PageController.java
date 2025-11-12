@@ -3,7 +3,6 @@ package com.jackson.demonotes2.controllers;
 
 import java.util.List;
 
-import com.jackson.demonotes2.model.Category;
 import com.jackson.demonotes2.repository.CategoryRepository;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
@@ -91,7 +90,13 @@ public class PageController {
 
     @DeleteMapping("/delete-note/{id}")
     public String deleteNote(@PathVariable Long id) {
-        noteService.delete(id);
+        noteService.deleteById(id);
+        return "redirect:/list-notes";
+    }
+
+    @DeleteMapping("/delete-note")
+    public String deleteNoteByParam(@RequestParam("noteId") Long id) {
+        noteService.deleteById(id);
         return "redirect:/list-notes";
     }
 

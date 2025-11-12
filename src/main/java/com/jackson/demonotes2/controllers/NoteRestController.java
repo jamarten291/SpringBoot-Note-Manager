@@ -41,7 +41,7 @@ public class NoteRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        noteService.delete(id);
+        noteService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
