@@ -1,31 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Editar una Nota</title>
-    <meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/head :: head">
+    <title></title>
 </head>
 <body>
-    <h1>Editar una Nota</h1>
-        <form action="#" th:action="@{/edit-note/{id}(id=${note.id})}" th:object="${note}" method="post">
+    <div class="container-fluid">
+        <h1>Editar una Nota</h1>
+        <form th:action="@{/edit-note/{id}(id=${note.id})}"
+              th:object="${note}"
+              method="post"
+              class="needs-validation"
+              novalidate>
+
+            <!-- Spring‑MVC hidden field for HTTP PUT -->
             <input type="hidden" name="_method" value="PUT"/>
 
-            <label for="title">Título:</label>
-            <input type="text" id="title" name="title" th:field="*{title}"/><br><br>
+            <!-- Título -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Título</label>
+                <input type="text"
+                       id="title"
+                       th:field="*{title}"
+                       class="form-control"
+                       required>
+                <div class="invalid-feedback">
+                    Por favor, escribe el título.
+                </div>
+            </div>
 
-            <label for="content">Contenido:</label>
-            <textarea id="content" name="content" th:field="*{content}"></textarea><br><br>
+            <!-- Contenido -->
+            <div class="mb-3">
+                <label for="content" class="form-label">Contenido</label>
+                <textarea id="content"
+                          th:field="*{content}"
+                          class="form-control"
+                          rows="5"
+                          required></textarea>
+                <div class="invalid-feedback">
+                    El contenido no puede estar vacío.
+                </div>
+            </div>
 
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" th:field="*{category}">
-                <option value="">-- Selecciona una Categoría --</option>
-                <option th:each="cat : ${categories}"
-                        th:value="${cat.categoryId}"
-                        th:text="${cat.name}">
-                </option>
-            </select>
+            <!-- Categoría -->
+            <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select id="categoria"
+                        th:field="*{category}"
+                        class="form-select"
+                        required>
+                    <option value="">-- Selecciona una Categoría --</option>
+                    <option th:each="cat : ${categories}"
+                            th:value="${cat.categoryId}"
+                            th:text="${cat.name}"
+                            th:selected="${cat.categoryId == note.category?.categoryId}">
+                    </option>
+                </select>
+                <div class="invalid-feedback">
+                    Debes elegir una categoría.
+                </div>
+            </div>
 
-            <button type="submit">Editar Nota</button>
+            <!-- Botón de envío -->
+            <button type="submit" class="btn btn-primary">Editar Nota</button>
         </form>
-    <p><a th:href="@{/menu}">Volver al menú</a></p>
+        <p><a th:href="@{/menu}">Volver al menú</a></p>
+    </div>
 </body>
+<footer th:replace="fragments/footer :: scripts_bootstrap"></footer>
 </html>
