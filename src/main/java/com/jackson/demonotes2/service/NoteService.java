@@ -89,6 +89,7 @@ public class NoteService {
 
         note.setTitle(noteDetails.getTitle());
         note.setContent(noteDetails.getContent());
+        note.setCategory(noteDetails.getCategory());
 
         return noteRepository.save(note);
     }

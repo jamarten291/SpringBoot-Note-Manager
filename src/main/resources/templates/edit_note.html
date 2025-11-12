@@ -15,6 +15,15 @@
             <label for="content">Contenido:</label>
             <textarea id="content" name="content" th:field="*{content}"></textarea><br><br>
 
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" th:field="*{category}">
+                <option value="">-- Selecciona una Categoría --</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.categoryId}"
+                        th:text="${cat.name}">
+                </option>
+            </select>
+
             <button type="submit">Editar Nota</button>
         </form>
     <p><a th:href="@{/menu}">Volver al menú</a></p>

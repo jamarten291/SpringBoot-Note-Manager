@@ -3,6 +3,7 @@ package com.jackson.demonotes2.controllers;
 
 import java.util.List;
 
+import com.jackson.demonotes2.model.Category;
 import com.jackson.demonotes2.repository.CategoryRepository;
 import com.jackson.demonotes2.service.NoteService;
 import jakarta.validation.Valid;
@@ -34,6 +35,7 @@ public class PageController {
     @GetMapping("/new-note")
     public String showNewNoteForm(Model model) {
         model.addAttribute("note", new Note());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "new_note";
     }
 
@@ -73,6 +75,7 @@ public class PageController {
     public String showEditNoteForm(@PathVariable Long id, Model model) {
         Note note = noteService.findByIdOrThrow(id);
         model.addAttribute("note", note);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "edit_note";
     }
 
