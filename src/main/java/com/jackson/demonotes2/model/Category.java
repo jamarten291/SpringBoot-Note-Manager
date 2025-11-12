@@ -3,6 +3,9 @@ package com.jackson.demonotes2.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Category {
 
@@ -13,6 +16,9 @@ public class Category {
     @NotBlank(message = "El nombre de la categoría no debe estar vacío")
     @Column(unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Note> notes = new HashSet<>();
 
     public Category() {
     }

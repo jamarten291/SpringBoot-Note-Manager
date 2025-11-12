@@ -22,20 +22,12 @@ public class Note {
     @NotBlank(message = "El contenido no debe estar vacío")
     private String content;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
     private Category category;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Note() {
         this.createdAt = LocalDateTime.now();
@@ -63,6 +55,14 @@ public class Note {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
@@ -70,4 +70,5 @@ public class Note {
     public LocalDateTime getCreationDate() {
         return createdAt;
     }
+
 }
